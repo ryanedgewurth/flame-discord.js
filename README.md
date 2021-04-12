@@ -1,1 +1,1 @@
-Flame Discord Rewrite. To install, see [[INSTALL.MD]]
+Flame Discord Rewrite. To install, see INSTALL.MD
