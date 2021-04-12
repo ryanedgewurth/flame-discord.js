@@ -63,21 +63,30 @@ client.on('message', msg => {
 			msg.channel.send ("Command Syntax is ``&settings <server/user> [setting]``, for a full list of settings, see <link goes here>");
 		}
 		if (cmd[1] == "server") {
-				if (cmd[2] == "prefix") {
+				/*if (cmd[2] == "prefix") {
 						msg.channel.send("Set prefix to ``" + cmd[3] + "``");
-				}
+				}*/
+				msg.reply("To Be Done")
 		}
 		if (cmd[1] == "user") {
 				if (cmd[2] == "dmhelp") {
 						if (typeof userconf[msg.author.id + "_dmhelp"] === "undefined") {
-							
+							userconf[msg.author.id + "_dmhelp"] = "true";
+							fs.writeFile("./configs/userconf.json",JSON.stringify(userconf));
+							msg.reply("Set Send DM Help to True");
+						}
+						if (typeof userconf[msg.author.id + "_dmhelp"] === "true") {
+							userconf[msg.author.id + "_dmhelp"] = "false";
+							fs.writeFile("./configs/userconf.json",JSON.stringify(userconf)); 
+							msg.reply("Set Send DM Help to False");
+						} else {
+							userconf[msg.author.id + "_dmhelp"] = "true";
+							fs.writeFile("./configs/userconf.json",JSON.stringify(userconf));
+							msg.reply("Set Send DM Help to True");
 						}
 				}
 		}
     }
-	if (cmd[0] === clientPrefix + "printid") {
-		msg.channel.send (msg.id)
-	}
 	if (cmd[0] === clientPrefix + "help") {
 		if (typeof userconf[msg.author.id + "_dmhelp"] === "undefined") {
 		userconf[msg.author.id + "_dmhelp"] = "true";
@@ -89,9 +98,6 @@ client.on('message', msg => {
 			msg.reply(InfoCmds.help(cmd[1]))
 		};
 		
-    }
-	if (cmd[0] === clientPrefix + "sendname") {
-		msg.channel.send (msg.guild.members.get(msg.author.id).user.username);
     }
 	if (cmd[0] === clientPrefix + "ban") {
 		const user = msg.mentions.users.first();
@@ -195,12 +201,7 @@ client.on('message', msg => {
 	
 	if (cmd[0] === clientPrefix + "ping") {
 		var date = new Date();
-        var timestampbef = date.getMilliseconds();
-		msg.channel.send ("Please Wait...");
-		var date = new Date();
-		var timestampaft = date.getMilliseconds();
-		var latency = timestampaft - timestampbef;
-		msg.channel.send ("Pong! The latency is " + latency.toFixed(0) + "ms");
+		msg.channel.send ("Pong! The latency is " + (msg.createdTimestamp - Date.now()) + "ms");
     }
 	if (cmd[0] === clientPrefix + "bal") {
 		if (typeof levels[msg.author.id] === "undefined") {
@@ -258,4 +259,4 @@ client.on('message', msg => {
 	}
 });
 
-client.login('yeet');
+client.login('<TOKEN>');
