@@ -24,5 +24,5 @@ exports.help = function(command) {
 	}
 }
 exports.about = function() {
-	return "Prototype Version of Flame Bot for Discord. Programmed by Edgewurth@wnlB in Node.JS. Development fully begun 27 May 2020";
+	return "Prototype Version of Flame Bot for Discord. Programmed by ``Ryan Edgewurth#2004`` in Node.JS. Development fully begun 27 May 2020";
 }
