@@ -1,2 +1,1 @@
-# flame-discord.js
-Flame Rewrite on Discord.JS
+Flame Discord Rewrite. To install, see [[INSTALL.MD]]
