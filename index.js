@@ -1,11 +1,18 @@
+/*
+Please read INSTALL.MD before running this software package
+---
+Flame Discord Bot JavaScript Rewrite
+By Ryan "Edgewurth"
+*/
+
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const client = new Discord.Client();
-const InfoCmds = require("./cmd/info.js");
-const FunCmds = require("./cmd/fun.js");
-const EcoCmds = require("./cmd/eco.js");
-const SettingCmds = require("./cmd/settings.js");
-const ErrorCmds = require("./cmd/errorhandle.js");
+const flameInfoCommands = require("./cmd/info.js");
+const flameFunCommands = require("./cmd/fun.js");
+const flameEcoCommands = require("./cmd/eco.js");
+const flameSettingCommands = require("./cmd/settings.js");
+const flameErrorHandler = require("./cmd/errorhandle.js");
 
 const queue = new Map();
 
@@ -51,7 +58,7 @@ client.on('message', msg => {
 		msg.channel.send (cmd[1]);
 	}
 	if (cmd[0] === clientPrefix + "about") {
-        msg.channel.send (InfoCmds.about())
+        msg.channel.send (flameInfoCommands.about())
     }
 	if (cmd[0] === clientPrefix + "throwerr") {
         throw "Test Error Message";
@@ -93,9 +100,9 @@ client.on('message', msg => {
 		};
 		if (userconf[msg.author.id + "_dmhelp"] === "true") {
 			msg.channel.send ("Please check your inbox to see the help list. If your private messages are closed, then please type ``&settings``, and press the User/Send Help to Inbox buttons.");
-			msg.author.send(InfoCmds.help(cmd[1]))
+			msg.author.send(flameInfoCommands.help(cmd[1]))
 		} else {
-			msg.reply(InfoCmds.help(cmd[1]))
+			msg.reply(flameInfoCommands.help(cmd[1]))
 		};
 		
     }
@@ -181,7 +188,7 @@ client.on('message', msg => {
 		}
     }
 	if (cmd[0] === clientPrefix + "8ball") {
-        msg.channel.send (FunCmds.eightball())
+        msg.channel.send (flameFunCommands.eightball())
     }
 	
 	if (cmd[0] === clientPrefix + "dbg") {
@@ -217,9 +224,9 @@ client.on('message', msg => {
       msg.channel.send ("__**Leaderboard**__\n10. " + levelsort[Object.keys(levelsort)[1]].name);
     }
 	if (cmd[0] === clientPrefix + "work") {
-		var job = EcoCmds.getjob();
-		var pay = EcoCmds.getworkpay(job);
-		var jobname = EcoCmds.getworkplace(job);
+		var job = flameEcoCommands.getjob();
+		var pay = flameEcoCommands.getworkpay(job);
+		var jobname = flameEcoCommands.getworkplace(job);
 		if (typeof levels[msg.author.id] === "undefined") {
 		levels[msg.author.id] = pay;
 		} else {
@@ -255,7 +262,7 @@ client.on('message', msg => {
 	levels[msg.author.id] = levels[msg.author.id] + 1;}
 	fs.writeFile("./configs/levels.json",JSON.stringify(levels)); }
 	catch(err) {
-		msg.reply(ErrorCmds.errorhandle(err.message, err.name, msg.content, msg.author.id));
+		msg.reply(flameErrorHandler.errorhandle(err.message, err.name, msg.content, msg.author.id));
 	}
 });
 
