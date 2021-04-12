@@ -258,4 +258,4 @@ client.on('message', msg => {
 	}
 });
 
-client.login('NjE3ODQ2MTkyMDYzMzgxNTQ2.XWxEGw.KitRpWycCiXMEPVX11kDwZe-TiI');
+client.login('yeet');
